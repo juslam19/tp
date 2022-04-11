@@ -42,6 +42,10 @@ public class TestDate {
         return true;
     }
 
+    public String toDefaultString() {
+        return date.toString();
+    }
+
     @Override
     public String toString() {
         String formattedDate = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));

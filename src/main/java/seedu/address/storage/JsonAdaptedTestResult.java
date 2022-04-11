@@ -41,7 +41,7 @@ class JsonAdaptedTestResult {
      */
     public JsonAdaptedTestResult(TestResult source) {
         patientNric = source.getPatientNric().value;
-        testDate = source.getTestDate().toString();
+        testDate = source.getTestDate().toDefaultString();
         medicalTest = source.getMedicalTest().value;
         result = source.getResult().value;
     }
