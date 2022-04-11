@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.time.format.DateTimeFormatter;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,8 +11,6 @@ import seedu.address.model.prescription.DrugName;
 import seedu.address.model.prescription.Instruction;
 import seedu.address.model.prescription.Prescription;
 import seedu.address.model.prescription.PrescriptionDate;
-
-import java.time.format.DateTimeFormatter;
 
 public class JsonAdaptedPrescription {
 
