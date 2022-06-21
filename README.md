@@ -1,3 +1,5 @@
+This is the Team Project for CS2103T Software Engineering.
+
 [![CI Status](https://github.com/AY2122S2-CS2103T-T11-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S2-CS2103T-T11-1/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/AY2122S2-CS2103T-T11-1/tp/branch/master/graph/badge.svg?token=2D312VMBNN)](https://codecov.io/gh/AY2122S2-CS2103T-T11-1/tp)
 
