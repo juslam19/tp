@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+
+box Authentication AUTH_COLOR_T1
+participant ":AuthenticationManager" as AuthenticationManager AUTH_COLOR
+end box
+
+box Encryption ENCRYPTION_COLOR_T1
+participant ":EncryptionManager" as EncryptionManager ENCRYPTION_COLOR
+end box
+
+participant "<color:#red>**<<class>>**\n<color:#black>FileUtil" as FileUtil
+
+[-> AuthenticationManager : login(...)
+activate AuthenticationManager
+
+AuthenticationManager -> EncryptionManager : decryptFile(...)
+activate EncryptionManager
+
+EncryptionManager -> FileUtil : writeToFile()
+activate FileUtil
+
+FileUtil --> EncryptionManager
+deactivate FileUtil
+
+EncryptionManager --> AuthenticationManager
+deactivate EncryptionManager
+
+
+[<--AuthenticationManager
+deactivate AuthenticationManager
+@enduml

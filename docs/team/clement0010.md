@@ -39,15 +39,17 @@ Given below are my contributions to the project.
     * Extended product to support patient NRIC. Pull request: [#34](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/34)
     * Updated Ui logic to support switching of different view panels. Pull request: [#45](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/45)
   * Code Quality
-    * Wrote test cases to increase code coverage from XX% to XX%. Pull request: [WIP]()
+    * Updated patient's test code to include NRIC. Pull request: [#34](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/34)
+    * Wrote encryption manager test code. Pull request: [#110](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/110)
 
 * **Documentation**:
   * User Guide
     * Added patients' emergency contact section. Pull request: [#17](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/17)
     * Added quickstart and FAQ section. Pull request: [#139](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/139)
+    * Structured user guide to improve readability. Pull request: [#251](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/251)
   * Developer Guide
     * Scaffolded the basic structure of developer guide. Pull request: [#79](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/79)
-    * Added implementation details of encryption and login feature. Pull request: [WIP]()
+    * Added implementation details of encryption and login feature. Pull request: [#254](https://github.com/AY2122S2-CS2103T-T11-1/tp/pull/254)
 
 * **Community**:
   * Reviews and Comments

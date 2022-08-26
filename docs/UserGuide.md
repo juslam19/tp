@@ -3,8 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Welcome to MedBook's user guide. This guide serves to equip users with the necessary knowledge to fully utilise all the
-features implemented in MedBook.
+Welcome to MedBook's user guide. This guide serves to equip users with the necessary knowledge to utilise all the features implemented in MedBook fully.
 ## Navigation Links
 
 Click any links below to navigate into that section.
@@ -58,7 +57,7 @@ prescriptions through a simple and easy-to-use platform.
 
 ## Quick start
 
-This section contains all the necessary information you will need to get started with using MedBook.
+This section contains all the necessary information to get started with using MedBook.
 
 ### Requirement
 
@@ -68,7 +67,9 @@ This section contains all the necessary information you will need to get started
 ### Setup
 
 1. Copy the file to the folder you want to use as the home folder for MedBook.
-2. Double-click the `MedBook.jar` to start the app.
+2. Open MedBook through one of the following ways:
+    * Double clicking `MedBook.jar` located in your MedBook home folder
+    * In a command window, `cd` to your MedBook home folder and type `java -jar MedBook.jar`
 
 <div style="page-break-after: always;"></div>
 
@@ -81,13 +82,13 @@ This section describes each part of the graphical user interface in detail.
    <img src="images/GUI.png" alt="Graphical User Interface">
 </figure>
 
-| Label | Description                                                                                                  |
-| ----- | ------------------------------------------------------------------------------------------------------------ |
-| 1     | **Toolbar**. This is where the settings that allow you to exit the application and open the help window are. |
-| 2     | **Command Input**. This is where you type the commands to be executed by the application.                    |
-| 3     | **Command Result**. This text box displays MedBook's response to the command entered.                        |
-| 4     | **List of Patients**. This is the list of patients that are stored in the application.                       |
-| 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information.                                   |
+| Label | Description                                                                                           |
+| ----- |-------------------------------------------------------------------------------------------------------|
+| 1     | **Toolbar**. This is where the settings allow you to exit the application and open the help window.   |
+| 2     | **Command Input**. This is where you type the commands to be executed by the application.             |
+| 3     | **Command Result**. This text box displays MedBook's response to the command entered.                 |
+| 4     | **List of Patients**. This is the list of patients that are stored in the application.                |
+| 5     | **Scroll Bar**. This scroll bar allows you to scroll for more information.                            |
 
 ### Controls
 
@@ -101,7 +102,7 @@ Follow this tutorial to get started with using MedBook:
    * Double clicking `MedBook.jar` located in your MedBook home folder 
    * In a command window, `cd` to your MedBook home folder and type `java -jar MedBook.jar`
 2. If this is your first time using MedBook, you will see a prompt window requesting you to set up a new password.
-3. Type in a password which fits the requirements and press `enter` to continue.
+3. Type in a password that fits the requirements and press `enter` to continue.
 
     <figure class="figure">
       <img src="images/SignUpScreen.png" alt="Password Prompt Display" width="350">
@@ -124,8 +125,7 @@ Follow this tutorial to get started with using MedBook:
        <figcaption class="figure-caption">Figure 2: Login Prompt Display</figcaption>
    </figure>
 
-5. After you have successfully logged in, the GUI will be loaded up with sample data and MedBook should look like the
-   picture below.
+5. After you have successfully logged in, the GUI will launch with some sample data and MedBook will look like the picture below.
 
    <figure class="figure">
        <img src="images/HomeScreen.png" alt="Login Prompt Display" width="500">
@@ -146,7 +146,7 @@ This section provides an overview of all the available commands in MedBook. Clic
 **:information_source: Notes about the command format:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter that can be used as such `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [tg/TAG]` can be used as `n/John Doe tg/diabetic` or as `n/John Doe`.
@@ -157,8 +157,7 @@ This section provides an overview of all the available commands in MedBook. Clic
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of
-  the parameter will be taken.<br>
+- If a parameter is expected only once in the command but you specified it multiple times, MedBook will only register the last occurence.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, and `exit`) will be ignored.<br>
@@ -250,18 +249,18 @@ Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tg/TAG]...`
 
 Patient's NRIC must be a valid Singapore-issued NRIC. MedBook will only accept the following NRIC format:
 
-1. NRIC consists alphanumeric characters only.
+1. NRIC consists of alphanumeric characters only.
 2. NRIC starts with either S, T, F, G, or M character.
-3. NRIC consists 7 digits after the first character.
+3. NRIC consists of 7 digits after the first character.
 4. NRIC ends with any character.
 
 Note: Since the checksum algorithm to validate the last character is not open-source, we only validate the formatting
 of the NRIC.
 
-See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) /for more information about valid
+See [here](https://en.wikipedia.org/wiki/National_Registration_Identity_Card) for more information about valid
 Singapore NRIC.
 
-NRIC **cannot be edited** in the future. Please ensure you keyed in the correct NRIC before proceeding.
+NRIC **cannot be edited** in the future. Please ensure that you have keyed in the correct NRIC before proceeding.
 
 </div>
 
@@ -305,7 +304,7 @@ Examples:
 
 ### Editing Patient Information: `edit`
 
-Edits an existing patient information entry in MedBook when a list of patient's information entries are being displayed.
+Edits an existing patient's information entry in MedBook when a list of patients’ information entries is displayed.
 This is except for the NRIC field, which cannot be modified after the creation of the Patient Information.
 At least one field must be filled for the edit command to be valid.
 
@@ -315,13 +314,19 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
   The index must be a positive integer 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the patient will be removed i.e editing of tags is not cumulative.
 - You can remove all the patient's tags by typing tg/ without specifying any tags after it.
 
 Examples:
 
-- `view` followed by `edit 1 n/John` updates the name of the first patient information entry displayed on the screen
-  to John.
+- `view` followed by `edit 1 n/Alex Tan` updates the name of the first patient information entry displayed on the screen
+  to Alex Tan.
+
+<figure class="figure">
+  <img src="images/EditScreen.png" alt="Edit Screen Result" width="350">
+  <figcaption class="figure-caption text-right">Edit First Patient on Displayed List</figcaption>
+</figure>
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Editing a patient will overwrite the old data.
@@ -343,13 +348,13 @@ The NRIC specified here cannot be edited in the future.
 **:bulb: Tips:**
 
 1. A contact can have any number of tags (including 0).
-2. If you typed the wrong NRIC, `delete INDEX` the contact and `add` the contact again with the correct patient NRIC.
+2. If you typed the wrong NRIC, `delete` the contact and `add` the contact again with the correct patient NRIC.
 </div>
 
 Examples:
 
 - `add t/contact i/S1234567L n/Rihanna p/80008000 e/rihanna@gmail.com a/COM1 tg/primary tg/mother` adds an emergency
-  contact to patient with NRIC, S1234567L.
+  contact Rihanna to the patient with NRIC, S1234567L.
 
 Below is the list of parameters that can be used with the `add t/contact` command. 
 
@@ -387,7 +392,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TAG]...`
   The index must be a positive integer 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the patient will be removed i.e editing of tags is not cumulative.
 - You can remove all the contact's tags by typing tg/ without specifying any tags after it.
 
 Examples:
@@ -408,7 +413,7 @@ Adds a patient's medical information to MedBook.
 Format: `add t/medical i/NRIC [a/AGE] [bt/BLOOD_TYPE] [md/MEDICATION] [ht/HEIGHT] [wt/WEIGHT] [il/ILLNESSES] [su/SURGERIES] [fh/FAMILY_HISTORY] [ih/IMMUNIZATION_HISTORY] [gd/GENDER] [et/ETHNICITY]`
 
 - We recommend inputting blood type using ABO blood group system (e.g. AB), height using centimeters (e.g. 185 cm), weight
-  using kilograms (e.g. 70 kg), gender as either Male, Female or Non-binary, but allow any other system or special values.
+  using kilograms (e.g. 70 kg), gender as either Male, Female or Non-binary, but we also allow any other system or special values.
 
 Examples:
 
@@ -446,7 +451,7 @@ Examples:
 
 ### Editing Medical Information: `edit`
 
-Edits an existing medical information entry in MedBook when a list of medical information entries are being displayed.
+Edits an existing medical information entry in MedBook when a list of medical information entries is displayed.
 This is except for the NRIC field, which cannot be modified after the creation of the Medical Information.
 At least one field must be filled for the edit command to be valid.
 
@@ -493,7 +498,7 @@ Examples:
 
 ### Editing Consultation Information: `edit`
 
-Edits an existing consultation entry in MedBook when a list of consultation entries are being displayed.
+Edits an existing consultation entry in MedBook when a list of consultation entries is displayed.
 This is except for the NRIC field, which cannot be modified after the creation of the Consultation record.
 At least one field must be filled for the edit command to be valid.
 
@@ -542,7 +547,7 @@ Examples:
 
 ### Editing Prescription: `edit`
 
-Edits an existing prescription entry in MedBook when a list of prescription entries are being displayed.
+Edits an existing prescription entry in MedBook when a list of prescription entries is displayed.
 This is except for the NRIC field, which cannot be modified after the creation of the Prescription record.
 At least one field must be filled for the edit command to be valid.
 
@@ -578,6 +583,8 @@ Below is the list of parameters that can be used with the `add t/test` command.
 | `mt/`      | _Required_. The name of the medical test taken.                      |
 | `r/`       | _Required_. The results of the test taken.                           |
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing Test Result: `view t/test`
 
 Views all the test results taken by a patient in MedBook.
@@ -590,7 +597,7 @@ Examples:
 
 ### Editing Test Result: `edit`
 
-Edits an existing test result entry in MedBook when a list of test result entries are being displayed.
+Edits an existing test result entry in MedBook when a list of test result entries is displayed.
 This is except for the NRIC field, which cannot be modified after the creation of the Test Result record.
 At least one field must be filled for the edit command to be valid.
 
@@ -605,6 +612,8 @@ Examples:
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Editing a test result will overwrite the old data.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing Help: `help`
 
@@ -656,9 +665,11 @@ Examples:
 <div markdown="block" class="alert alert-info">
 **:information_source: Info:**<br>
 
-Although `NIL` is an empty placeholder for the optional fields, `find NIL` will still filter the records in
+1. Although `NIL` is an empty placeholder for the optional fields, `find NIL` will still filter the records in
 the current display to show those which contains the keyword `NIL` to accommodate for cases where the user intentionally
 types `NIL` in any field.
+
+2. `find` is not supported for a patient's summary. When viewing summary, `find` will filter the records in the list of Patients instead as this is the default behavior of `find`.
 
 </div>
 
@@ -676,7 +687,7 @@ data to `[HOME_DIRECTORY of MedBook.jar]/data/` in your new device if you wish t
 
 **Option 2 (with encryption):**
 By default, MedBook will always encrypt your data to `password.enc` in `[HOME_DIRECTORY of MedBook.jar]/data/` for
-security reason. You can move `password.enc` to `[HOME_DIRECTORY of MedBook.jar]/data/` in your new device and MedBook
+security reasons. You can move `password.enc` to `[HOME_DIRECTORY of MedBook.jar]/data/` in your new device and MedBook
 will ask for your password upon launching.
 
 </div>
@@ -684,9 +695,9 @@ will ask for your password upon launching.
 <div class="card">
 <div markdown="1">
 <h6 markdown="1">What happens if I forget my password?</h6>
-Due to security reason, there is no way to reset password. To continue using the application you need to delete the 
+Due to security reasons, there is no way to reset your password. To continue using the application, you need to delete the 
 encrypted data file (located at `[HOME_DIRECTORY of MedBook.jar]/data/password.enc`) or move it to another location. 
-MedBook will start with a fresh data for you to start over. See the next FAQ for restoring data.
+MedBook will start with a fresh set of data for you to start over. See the next FAQ for restoring data.
 </div>
 </div>
 <div class="card">
@@ -696,8 +707,8 @@ Unfortunately, the encrypted data will be lost along with your password. However
 `medbook.json` with you. Make sure you place them in `[HOME_DIRECTORY of MedBook.jar]/data/` before launching the app. 
 When you start MedBook again, you will be asked to set up a new password.
 
-We highly discourage users to tamper with `password.enc` for security reason as any encryption can be broken given
-sufficient amount of time.
+We highly discourage users to tamper with `password.enc` for security reasons as any encryption can be broken given
+a sufficient amount of time.
 
 </div>
 </div>
@@ -710,7 +721,7 @@ sufficient amount of time.
 We highly discourage users from modifying `medbook.json` directly as any invalid input will cause MedBook to launch with
 empty data and `medbook.json` will be overwritten.
 
-If you understand what you are dealing with, you may proceed with caution. We recommend you to back up a copy of
+If you understand what you are dealing with, you may proceed with caution. We recommend that you back up a copy of
 `medbook.json` in case you accidentally corrupt the file at any point in time.
 
 </div>

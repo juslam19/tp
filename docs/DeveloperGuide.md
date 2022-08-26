@@ -11,32 +11,40 @@ title: Developer Guide
   - [Logic component](#logic-component)
   - [Model component](#model-component)
   - [Storage component](#storage-component)
+  - [Authentication component](#authentication-component)
+  - [Encryption component](#encryption-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-  - [Dynamic Ui Rendering](#dynamic-ui-rendering)
+  - [Navigation of Command Input History](#navigation-of-command-input-history)
     - [Design Consideration](#design-consideration)
     - [Implementation](#implementation-1)
-  - [Create](#create)
+    - [Usage](#usage)
+  - [Authentication](#authentication)
     - [Design Consideration](#design-consideration-1)
     - [Implementation](#implementation-2)
-    - [Usage](#usage)
-  - [View](#view)
+  - [Add Feature](#add-feature)
     - [Design Consideration](#design-consideration-2)
     - [Implementation](#implementation-3)
     - [Usage](#usage-1)
-  - [Safe Delete](#safe-delete)
+  - [View Feature](#view-feature)
     - [Design Consideration](#design-consideration-3)
+      - [Aspects: How view executes:](#aspects-how-view-executes)
     - [Implementation](#implementation-4)
     - [Usage](#usage-2)
-      <div style="page-break-after: always;"></div>
-  - [Find](#find)
-    - [Design Consideration](#design-consideration-4)
+  - [Delete Feature](#delete-feature)
+    - [Design Considerations](#design-considerations)
+      - [Aspects: How delete executes:](#aspects-how-delete-executes)
     - [Implementation](#implementation-5)
     - [Usage](#usage-3)
-  - [Summary](#summary)
-    - [Design Consideration](#design-consideration-5)
+  - [Find Feature](#find-feature)
+    - [Design Consideration](#design-consideration-4)
+    - [Aspect: How find executes:](#aspect-how-find-executes)
     - [Implementation](#implementation-6)
     - [Usage](#usage-4)
+  - [Summary](#summary)
+    - [Design Consideration](#design-consideration-5)
+    - [Implementation](#implementation-7)
+    - [Usage](#usage-5)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -46,8 +54,9 @@ title: Developer Guide
   - [Glossary](#glossary)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
   - [Launch and shutdown](#launch-and-shutdown)
-  - [Deleting a person](#deleting-a-person)
+  - [Adding a record to an existing patient](#adding-a-record-to-an-existing-patient)
   - [Saving data](#saving-data)
+  - [Authentication](#authentication-1)
 
 ---
 
@@ -244,6 +253,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 The sections below give more details on how the following features are implemented.
 * [**Navigation of Command Input History**](#navigation-of-command-input-history)
+* [**Authentication**](#authentication)
 * [**Add Feature**](#add-feature)
 * [**View Feature**](#view-feature)
 * [**Delete Feature**](#delete-feature)
@@ -286,6 +296,52 @@ Step 3: The user decides to add another patient by modifying from the previous c
 The pointer in `CommandHistory` will point to the one before it and return the data.
 
 Step 4: The command box will show the input previously and hence the user can modify from there.
+
+<div style="page-break-after: always;"></div>
+
+### Authentication
+The authentication and encryption component works hand-in-hand to encrypt and decrypt user password and data.
+It allows user to store password safely formatted in the form of an encrypted file. 
+
+
+#### Design Consideration
+There are few system designs that can be used to implement the authentication feature:
+
+**Alternative 1 (Current choice):** Retain data and create encrypted files after exit
+* Pros:
+  * Allows user to edit data file locally
+  * Data file can still be accessed when encrypted file is missing
+* Cons:
+  * Creates vulnerability for hacker to access encrypted files
+
+**Alternative 2:** Delete data file and create encrypted file after exit
+* Pros:
+  * Achieves maximum data security
+* Cons:
+  * Data file cannot be retrieved when encrypted file is missing
+  * Violates project constraint - `Constraint-Human-Editable-File`
+
+#### Implementation
+The authentication feature is implemented with the following classes:
+* `AuthenticationManager` — Handles login and password set up with the help of `EncryptionManager` 
+  * Stores the authentication state such as `isLoggedIn` and `isSignedUp`
+* `EncryptionManager` — Handles the encryption and decryption of all data files.
+  * Requires a `SecretKey`, which is provided by `AesUtil` utility class.
+  * Requires a cipher algorithm (AES/CBC/PKCS5Padding).
+* `AesUtil` — A utility class to generate encryption `SecretKey` based on AES algorithm.
+  * `AesUtil#generateKey()` — Generates a `SecretKey` with the user password.
+* `MainApp` — `AuthenticationManager` is initiated here.
+  * There should be one and only one `AuthenticationManager` instance at any time to handle authentication.
+  * `AuthenticationManager` is notified here to encrypted data upon exiting.
+
+The following sequence diagram shows how the authentication mechanism works when the user logins to MedBook:
+
+<img src="images/LoginSequenceDiagram.png" />
+
+
+The following sequence diagram shows how the authentication mechanism works when the user exits MedBook:
+<img src="images/ExitSequenceDiagram.png" />
+
 
 <div style="page-break-after: always;"></div>
 
@@ -512,14 +568,14 @@ Our target users are healthcare professionals who need to keep track of patient�
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​  | I want to …​                                                               | So that I can…​                                           |
-|---|----------|----------------------------------------------------------------------------|-----------------------------------------------------------|
-| `* * *` | new user | see usage instructions                                                     | refer to instructions when I forget how to use the App    |
-| `* * *` | user     | add, update and delete a patient’s profile with their personal information | keep track of my patient's data                           |
-| `* * *` | user     | add, update and delete a patient's medical information                     | retrieve the record in the future                         |
-| `* * *` | user     | add patient's emergency contact                                            | contact their next-of-kin when something emergency happen |
-| `* * *` | user     | add, update and delete a patient’s test results                            | make diagnoses based on the result                        |
-| `* * *` | user     | add patient's medical prescription                                         | keep track of the medicine consumption                    |
-| `* * *` | user     | add patient's consultation history                                         | keep track of patient's health condition                  |
+| -------- | -------- | -------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `* * *`  | new user | see usage instructions                                                     | refer to instructions when I forget how to use the App    |
+| `* * *`  | user     | add, update and delete a patient’s profile with their personal information | keep track of my patient's data                           |
+| `* * *`  | user     | add, update and delete a patient's medical information                     | retrieve the record in the future                         |
+| `* * *`  | user     | add patient's emergency contact                                            | contact their next-of-kin when something emergency happen |
+| `* * *`  | user     | add, update and delete a patient’s test results                            | make diagnoses based on the result                        |
+| `* * *`  | user     | add patient's medical prescription                                         | keep track of the medicine consumption                    |
+| `* * *`  | user     | add patient's consultation history                                         | keep track of patient's health condition                  |
 
 
 ### Use cases
@@ -549,15 +605,11 @@ Use Case: Delete a Patient’s Contact Information
 
     Use case resumes at step 2.
 
-_{More to be added}_
-
 ### Non-Functional Requirements
 
 1.  Should work on any mainstream OS as long as it has Java 11 or above installed.
 2.  Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
 
 ### Glossary
 
@@ -581,28 +633,28 @@ testers are expected to do more *exploratory* testing.
 
   1. Download the jar file and copy into an empty folder
 
-  2. Double-click the jar file.<br>
+  2. Double-click the jar file.<br><br>
      Expected: Shows the GUI prompting user to enter a password. The window size may not be optimum.
 
 2. Saving window preferences
 
   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-  2. Re-launch the app by double-clicking the jar file.<br>
+  2. Re-launch the app by double-clicking the jar file.<br><br>
      Expected: The most recent window size and location is retained.
 
 ### Adding a record to an existing patient
 
 Prerequisites: A patient with NRIC `S1234567L` exists.
 
-1. Test case: `add t/prescription i/S1234567L n/Paracetamol 500 mg dt/2021-09-15 s/2 tablets after meal everyday`
-   Expected: A prescription record is added to patient with NRIC `S1234567L`. The command result display shows the newly added prescription, and a list of the patient's prescriptions is shown.
+**Test case: 1** `add t/prescription i/S1234567L n/Paracetamol 500 mg dt/2021-09-15 s/2 tablets after meal everyday`<br><br>
+Expected: A prescription record is added to patient with NRIC `S1234567L`. The command result display shows the newly added prescription, and a list of the patient's prescriptions is shown.
 
-2. Test case: `add t/prescription i/S123456789L n/Paracetamol 500 mg dt/2021-09-15 s/2 tablets after meal everyday`
-   Expected: No prescription added. Error details shown in the status message.
+**Test case: 1** `add t/prescription i/S123456789L n/Paracetamol 500 mg dt/2021-09-15 s/2 tablets after meal everyday`<br><br>
+Expected: No prescription added. Error details shown in the status message.
 
-4. Other invalid `add t/prescription` commands (e.g. missing parameters, adding to a patient that does not exist, invalid date, etc.).
-   Expected: Similar to previous.
+Other invalid `add t/prescription` commands (e.g. missing parameters, adding to a patient that does not exist, invalid date, etc.).<br><br>
+Expected: Similar to previous.
 
 
 ### Saving data
